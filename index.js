@@ -1,12 +1,25 @@
 function hasTargetSum(array, target) {
-  // Write your algorithm here
+  sumIsTarget = false;
+
+  // For each item in array
+  for (let i = 0; i < array.length; i++) {
+
+    // For each item in array (ii) after the compared item in array (i)
+    // Numbers behind i are not compared with i, for optimization
+    for (let ii = i + 1; ii < array.length; ii++) {
+      // Sets sumIsTarget to true forever if sum of numbers matches target at
+      // least once.
+      sumIsTarget = array[i] + array[ii] === target || sumIsTarget;
+    }
+  }
+  return sumIsTarget;
 }
 
-/* 
+/*
   Write the Big O time complexity of your function here
 */
 
-/* 
+/*
   Add your pseudocode here
 */
 
@@ -29,6 +42,21 @@ if (require.main === module) {
 
   console.log("Expecting: false");
   console.log("=>", hasTargetSum([1, 2, 5], 4));
+
+  console.log("");
+
+  console.log("Expecting: true");
+  console.log("=>", hasTargetSum([5, 9, 5, 2, 8], 14));
+
+  console.log("");
+
+  console.log("Expecting: true");
+  console.log("=>", hasTargetSum([7, 4, 5, 2, 9], 9));
+
+  console.log("");
+
+  console.log("Expecting: false");
+  console.log("=>", hasTargetSum([10, 1, 4, 6], 12));
 }
 
 module.exports = hasTargetSum;
